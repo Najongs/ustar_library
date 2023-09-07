@@ -161,3 +161,5 @@ cython_debug/
 
 # data file
 library_data/
+font/
+books_list/
