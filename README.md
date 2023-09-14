@@ -7,33 +7,37 @@ https://www.data4library.kr/
 ### Environment
  - python 3.10
  - pandas
+ - konlpy
  - pickle
  - matplotlib
  - seaborn
 ### Prerequisites
-**Step 1 - 데이터 전처리 진행 [link](https://forums.developer.nvidia.com/t/pytorch-for-jetson/72048)**   
-**Step 2 - 키워드 분석 진행**
+**Step 1 - 데이터 전처리 진행**   
+  
+**Step 2 - 키워드 분석 진행 [OKT](https://liveyourit.tistory.com/57)**  
+  
 **Step 3 - 추천 알고리즘 진행**
 
 ## Issues
-If you got TLS block issue when import the sklearn in ipynb, add this
+pickle를 사용하여 데이터를 불러온다.
 ```python
-import os
-os.environ['LD_PRELOAD']
+import pickle
 ```
 
 ## Customize
-Moving the Robot in real world you should have to change the parameters of Robot movements  for adaptable real world
+W_socre를 구하는 방법
 ```python
-if gesture_joints == 1: # stop
-    robot.stop()
+#avg = 대출건수, count = 도서권수
+v=popularite["count_rating"]
+R=popularite["avg_rating"]
+m=v.quantile(0.50)
+c=R.mean()
+popularite['w_score']=((v*R) + (m*c)) / (v+m)
 ```
 
 ## Running the tests
 ![](/동감_워드클라우드.png)
 ![](imgs/run.gif)
-![](imgs/backward.jpg)
-
 
 ## References
 - [kaggle](http://github.com/NVIDIA-AI-IOT/jetcam) - 책 추천 알고리즘에 대한 코드
